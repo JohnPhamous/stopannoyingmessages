@@ -11,6 +11,7 @@
 	"author": "Paul Armstrong <paul@paularmstrongdesigns.com>",
 	"dependencies": {
 		"express": "^4.14.1",
+		"facebook-chat-api": "^1.2.0",
 		"mongoose": "^4.8.2",
 		"superagent": "^3.4.1"
 	},
