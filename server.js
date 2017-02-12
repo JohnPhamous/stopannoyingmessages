@@ -21,7 +21,7 @@ login({
  	api.listen(function callback_listen(err, message) {
 		if (err || !message.body) return console.error(err, message);
 
-		var message_body = message.body.tolower();
+		var message_body = message.body.toLowerCase();
 
         api.getThreadInfo(message.threadID, function callback_getThreadInfo(err, info) {
         	if (err) return console.error(err);
@@ -31,7 +31,7 @@ login({
         	api.getUserInfo(info.participantIDs, function (err, participant_info) {
         		for (var prop in participant_info) {
         			if (participant_info.hasOwnProperty(prop)) {
-        				participant_names.push(participant_info[prop].firstName.tolower());
+        				participant_names.push(participant_info[prop].firstName.toLowerCase());
         			}
         		}
 
