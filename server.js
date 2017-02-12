@@ -19,7 +19,7 @@ login({
     	participant_names = [];
 
  	api.listen(function callback_listen(err, message) {
-		if (err) return console.error(err);
+		if (err || !message.body) return console.error(err);
 
 		var message_body = message.body;
 
