@@ -1,7 +1,7 @@
 var
 	login = require('facebook-chat-api'),
 	// handler = require('./functions/handler'),
- 	Sam = require('./config/Sam');
+ 	// Sam = require('./config/Sam');
 
 // login({
 // 	email: Sam.email,
@@ -9,8 +9,8 @@ var
 // }, handler);
 
 login({
-	email: Sam.email,
-	password: Sam.password,
+	email: process.env.EMAIL,
+	password: process.env.PASSWORD,
 }, function callback (err, api) {
     if (err) return console.error(err);
 
