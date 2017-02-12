@@ -1,5 +1,5 @@
-email = process.env.EMAIL;
-password = process.env.PASSWORD;
+email = process.argv[2];
+password = process.argv[3];
 
 var
 	Chat = require('./services/Chat'),
@@ -7,19 +7,24 @@ var
 	app = express(),
 	port = process.env.PORT || 8000;
 
+console.log(email, password);
+
 Chat
     .login(email, password)
     .then(function (api) {
     	return Chat.listen(api);
     })
     .then(function (message) {
-    	return Chat
+    	var thread_info;
+
+        return Chat
     		.getThreadInfo(message)
-    		.then(function (thread_info) {
-    			return Chat.getUserInfo(thread_info);
+    		.then(function (info) {
+                thread_info = info;
+    			return Chat.getUserInfo(info);
     		})
     		.then(function (participants_info) {
-    			return Chat.sendMessage(message.body, message.senderID, thread_info.name, participants_info);
+    			return Chat.sendMessage(message.body, message.senderID, thread_info, participants_info);
     		});
     })
     .catch(function (err) {

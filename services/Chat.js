@@ -7,7 +7,7 @@ module.exports = {
 	login: function (email, password) {
 		var deferred = $q.defer();
 		
-		login({
+		Login({
 		    email: email,
 		    password: password
 		}, function (err, api) {
@@ -66,24 +66,24 @@ module.exports = {
 
         return deferred.promise;
     },
-    sendMessage: function (message_body, message_author, thread_name, participants_info) {
+    sendMessage: function (message_body, message_author, thread_info, participants_info) {
         var
             deferred = $q.defer(),
             participants_names = [];
 
         for (var prop in participants_info) {
             if (participants_info.hasOwnProperty(prop)) {
-                participant_names.push(participants_info[prop].firstName.toLowerCase());
+                participants_names.push(participants_info[prop].firstName.toLowerCase());
             }
         }
 
-        for (var id in participant_names) {
-            if (message_body.includes(participant_names[id])) {
-                api.sendMessage(
-                    "[" + thread_name + "] " +
-                    participant_info[message_author].firstName + ": " +
+        for (var id in participants_names) {
+            if (message_body.includes(participants_names[id])) {
+                API.sendMessage(
+                    "[" + thread_info.name + "] " +
+                    participants_info[message_author].firstName + ": " +
                     message_body,
-                    participant_ids[id]);
+                    thread_info.participantIDs[id]);
             }
         }
     }
