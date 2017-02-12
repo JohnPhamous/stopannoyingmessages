@@ -9,8 +9,8 @@ var
 // }, handler);
 
 login({
-	email: process.env.EMAIL,
-	password: process.env.PASSWORD,
+	email: Sam.email,
+	password: Sam.password,
 }, function callback (err, api) {
     if (err) return console.error(err);
 
@@ -23,7 +23,7 @@ login({
 
 		var message_body = message.body.toLowerCase();
         var message_author = message.senderID;
-        
+
         api.getThreadInfo(message.threadID, function callback_getThreadInfo(err, info) {
         	if (err) return console.error(err);
 
