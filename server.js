@@ -1,7 +1,12 @@
 email = process.env.EMAIL;
 password = process.env.PASSWORD;
 
-var login = require('facebook-chat-api');
+var
+	login = require('facebook-chat-api'),
+	express = require('express'),
+	app = express(),
+	port = process.env.PORT || 8000;
+
 // handler = require('./functions/handler'),
 // Sam = require('./config/Sam');
 
@@ -59,3 +64,5 @@ login({
         });
     });
 });
+
+app.listen(port);
