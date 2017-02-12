@@ -29,6 +29,8 @@ login({
 
         	participant_ids = info.participantIDs;
 
+        	var thread_name = info.name;
+
         	api.getUserInfo(info.participantIDs, function (err, participant_info) {
         		for (var prop in participant_info) {
         			if (participant_info.hasOwnProperty(prop)) {
@@ -38,23 +40,14 @@ login({
 
         		for (var id in participant_names) {
         			if (message_body.includes(participant_names[id])) {
-        			    
-                        api.getUserInfo(message_author, function (err, message_author_info) { 
-                            for (var prop in message_author_info) { 
-                                if (message_author_info.hasOwnProperty(prop)) { 
-                                    
-                                    api.sendMessage("You've been mentioned! Author: " + message_author_info[prop].firstName, participant_ids[id]);
-                                }
-
-                            }
-                            
-
-                        });
-
+                        api.sendMessage(
+                        	"[" + thread_name + "] " +
+                        	participant_info[message_author].firstName + ": " +
+                        	message_body,
+                    	participant_ids[id]);
         			}
         		}
-
-        	});
+			});
         });
     });
 });
