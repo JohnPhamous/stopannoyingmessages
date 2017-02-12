@@ -25,6 +25,10 @@ login({
     api.listen(function callback_listen(err, message) {
         if (err || !message.body) return console.error(err, message);
 
+        if (message.type != "message") {
+        	return;
+        }
+
         var message_body = message.body.toLowerCase();
         var message_author = message.senderID;
 
