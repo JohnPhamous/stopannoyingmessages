@@ -32,6 +32,9 @@ sam$ TODO
 
 * [**Aaroh Mankad**](https://github.com/aarohmankad) - *Backend*
 * [**Patrick Le**](https://github.com/lepatrick714/) - *Hosting*
+* [**John Pham**](https://github.com/lepatrick714/) - *UX*
+* [**Richel Leung**](https://github.com/lepatrick714/) - *Research*
+* [**Terry Chiang**](https://github.com/lepatrick714/) - *Research*
 
 ## Acknowledgments
 
