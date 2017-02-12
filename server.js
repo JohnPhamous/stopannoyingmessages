@@ -7,17 +7,7 @@ var
 	app = express(),
 	port = process.env.PORT || 8000;
 
-// handler = require('./functions/handler'),
-// Sam = require('./config/Sam');
-
-// login({
-// 	email: Sam.email,
-// 	password: Sam.password,
-// }, handler);
-
 login({
-    // email: Sam.email,
-    // password: Sam.password,
     email: email,
     password: password
 }, function callback(err, api) {
