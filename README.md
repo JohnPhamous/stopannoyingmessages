@@ -19,7 +19,7 @@ yarn install --ignore-engines
 Now all you have to do is create a dummy Facebook account and provide the accounts username and password as environment variables when you run the server file. This can be done like so:
 
 ```bash
-sam$ TODO
+node server.js <dummy_accouny_email> <dummy_account_password>
 ```
 
 ## Built With

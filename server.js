@@ -28,7 +28,8 @@ Chat
     		});
     })
     .catch(function (err) {
-    	if (!err) {
+    	console.log("some error");
+        if (!err) {
     		return console.log("No message body found");
     	}
 

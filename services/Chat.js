@@ -16,7 +16,7 @@ module.exports = {
 			}
 
 			return deferred.resolve(api);
-		})
+		});
 
 		return deferred.promise;
 	},
@@ -79,6 +79,11 @@ module.exports = {
 
         for (var id in participants_names) {
             if (message_body.includes(participants_names[id])) {
+                console.log("Sending message", "[" + thread_info.name + "] " +
+                    participants_info[message_author].firstName + ": " +
+                    message_body,
+                    thread_info.participantIDs[id]);
+                
                 API.sendMessage(
                     "[" + thread_info.name + "] " +
                     participants_info[message_author].firstName + ": " +
