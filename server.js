@@ -1,3 +1,6 @@
+email = process.env.EMAIL;
+password = process.env.PASSWORD;
+
 var
 	login = require('facebook-chat-api'),
 	// handler = require('./functions/handler'),
@@ -11,8 +14,8 @@ var
 login({
 	// email: Sam.email,
 	// password: Sam.password,
-  email: process.env.EMAIL,
-  password: process.env.PASSWORD
+  email: email,
+  password: password
 }, function callback (err, api) {
     if (err) return console.error(err);
 
