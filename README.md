@@ -1,24 +1,38 @@
-# Stop Annoying Messages (S.A.M)
+# Stop Annoying Messages (S.A.M.)
 
-## Features
+[Sam Don't-Spam](https://www.facebook.com/sam.dontspam.3) is a programatically controlled Facebook user who helps you reduce spam from overactive group messages.
 
-- Create profile for SAM
-- When SAM is added to a group chat, the group chat is muted by the user who adds it
-- SAM will prompt a welcome message in the group chat
-- SAM will assign every group chat with a identifier
-- SAM will have commands `/sam {command}`
+## Usage
 
+Sam is an ordinary Facebook user for you, so just go ahead and friend him! Once you add him to a group chat, go ahead and mute it indefinitely. Sam will keep an eye out for anyone mentioning your name, and send you a private message when they do. Sam can work with multiple groups for multiple users!
 
+### Installing
 
-### When a user is mentioned on a group chat
-"You've been mentioned!"
+Want your own Sam? First clone this repository and use [Yarn](https://yarnpkg.com/en/) to import necessary dependencies.
 
-- Group Name 
+```bash
+git clone https://github.com/JohnPhamous/stopannoyingmessages.git
+cd stopannoyingmessages
+yarn install --ignore-engines
+```
 
------------------------
+Now all you have to do is create a dummy Facebook account and provide the accounts username and password as environment variables when you run the server file. This can be done like so:
 
-- Message Body 
-    
-    - Message Author 
+```bash
+sam$ TODO
+```
 
+## Built With
 
+* [Node.js](https://nodejs.org/en/) - Backend engine of choice
+* [Yarn](https://yarnpkg.com/en/) - Dependency Management
+* [Express](http://expressjs.com/) - Web Framework
+
+## Authors
+
+* [**Aaroh Mankad**](https://github.com/aarohmankad) - *Backend*
+* [**Patrick Le**](https://github.com/lepatrick714/) - *Hosting*
+
+## Acknowledgments
+
+* Thanks to [HackPoly 2017](http://www.hackpoly.com/) for giving us the space and time to work on this project!
