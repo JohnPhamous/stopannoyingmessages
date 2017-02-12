@@ -1,6 +1,7 @@
 var
 	Login = require('facebook-chat-api'),
-	$q = require('q');
+	$q = require('q'),
+    API;
 
 module.exports = {
 	login: function (email, password) {
@@ -20,54 +21,70 @@ module.exports = {
 		return deferred.promise;
 	},
 	listen: function (api) {
-		
-	}
-}
+		var deferred = $q.defer();
 
-login({
-    email: email,
-    password: password
-}, function callback(err, api) {
-    if (err) return console.error(err);
+        API = api;
 
-    var
-        participant_ids = [],
-        participant_names = [];
+        API.listen(function (err, message) {
+            if (err) {
+                return deferred.reject(err);
+            } else if (!message || message.type != "message") {
+                return deferred.reject(err);
+            }
 
-    api.listen(function callback_listen(err, message) {
-        if (err || !message.body) return console.error(err, message);
+            return deferred.resolve(message);
+        });
 
-        if (message.type != "message") {
-        	return;
+        return deferred.promise;
+	},
+    getThreadInfo: function (message) {
+        var deferred = $q.defer();
+
+        API.getThreadInfo(message.threadID, function (err, thread_info) {
+            if (err) {
+                return deferred.reject(err);
+            }
+
+            return deferred.resolve(thread_info);
+        });
+
+        return deferred.promise;
+    },
+    getUserInfo: function (thread_info) {
+        var
+            deferred = $q.defer(),
+            participant_ids = thread_info.participantIDs,
+            thread_name = thread_info.name;
+
+        API.getUserInfo(participant_ids, function (err, participants_info) {
+            if (err) {
+                return deferred.reject(err);
+            }
+
+            return deferred.resolve(participants_info);
+        });
+
+        return deferred.promise;
+    },
+    sendMessage: function (message_body, message_author, thread_name, participants_info) {
+        var
+            deferred = $q.defer(),
+            participants_names = [];
+
+        for (var prop in participants_info) {
+            if (participants_info.hasOwnProperty(prop)) {
+                participant_names.push(participants_info[prop].firstName.toLowerCase());
+            }
         }
 
-        var message_body = message.body.toLowerCase();
-        var message_author = message.senderID;
-
-        api.getThreadInfo(message.threadID, function callback_getThreadInfo(err, info) {
-            if (err) return console.error(err);
-
-            participant_ids = info.participantIDs;
-
-            var thread_name = info.name;
-
-            api.getUserInfo(info.participantIDs, function(err, participant_info) {
-                for (var prop in participant_info) {
-                    if (participant_info.hasOwnProperty(prop)) {
-                        participant_names.push(participant_info[prop].firstName.toLowerCase());
-                    }
-                }
-
-                for (var id in participant_names) {
-                    if (message_body.includes(participant_names[id])) {
-                        api.sendMessage(
-                            "[" + thread_name + "] " +
-                            participant_info[message_author].firstName + ": " +
-                            message_body,
-                            participant_ids[id]);
-                    }
-                }
-            });
-        });
-    });
-});
+        for (var id in participant_names) {
+            if (message_body.includes(participant_names[id])) {
+                api.sendMessage(
+                    "[" + thread_name + "] " +
+                    participant_info[message_author].firstName + ": " +
+                    message_body,
+                    participant_ids[id]);
+            }
+        }
+    }
+};
