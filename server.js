@@ -22,7 +22,8 @@ login({
 		if (err || !message.body) return console.error(err, message);
 
 		var message_body = message.body.toLowerCase();
-
+        var message_author = message.senderID;
+        
         api.getThreadInfo(message.threadID, function callback_getThreadInfo(err, info) {
         	if (err) return console.error(err);
 
@@ -37,9 +38,22 @@ login({
 
         		for (var id in participant_names) {
         			if (message_body.includes(participant_names[id])) {
-        				api.sendMessage("You've been mentioned!", participant_ids[id]);
+        			    
+                        api.getUserInfo(message_author, function (err, message_author_info) { 
+                            for (var prop in message_author_info) { 
+                                if (message_author_info.hasOwnProperty(prop)) { 
+                                    
+                                    api.sendMessage("You've been mentioned! Author: " + message_author_info[prop].firstName, participant_ids[id]);
+                                }
+
+                            }
+                            
+
+                        });
+
         			}
         		}
+
         	});
         });
     });
