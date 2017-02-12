@@ -1,5 +1,5 @@
-email = process.env.EMAIL;
-password = process.env.PASSWORD;
+email = process.argv[2];
+password = process.argv[3];
 
 var
 	login = require('facebook-chat-api'),
