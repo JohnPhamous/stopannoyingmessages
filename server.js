@@ -9,8 +9,10 @@ var
 // }, handler);
 
 login({
-	email: Sam.email,
-	password: Sam.password,
+	// email: Sam.email,
+	// password: Sam.password,
+  email: process.env.EMAIL,
+  password: process.env.PASSWORD
 }, function callback (err, api) {
     if (err) return console.error(err);
 
