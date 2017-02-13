@@ -1,6 +1,8 @@
 import pyautogui, time
 
 counter = 10
+counter_2 = 0
+
 name = "Aaroh"
 #phrases = ['Hello {}\n'.format(name), 'Hey {} I like ham\n'.format(name), 'I do not like spam, {}\n'.format(name), 'Spam musabi is nice though, {}\n'.format(name), 'Would you like some {}?\n'.format(name)]
 
@@ -11,6 +13,9 @@ while True:
     pyautogui.typewrite(phrases[i])
     pyautogui.typewrite('\n')
     i += 1
+    counter_2 += 1
     if i == 9:
         i = 0
+    if counter_2 == 10:
+        break
 
