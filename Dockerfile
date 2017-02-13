@@ -19,18 +19,5 @@ RUN apt-get install -y -q --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get -y autoclean
 
-# Installing yarn from the local .tgz
-RUN mkdir -p /opt
-ADD latest.tar.gz /opt/
-RUN mv /opt/dist /opt/yarn 
-ENV PATH "$PATH:/opt/yarn/bin"
-
-# Install packages using Yarn 
-ADD package.json /tmp/package.json
-RUN cd /tmp && yarn 
-RUN mkdir -p /opt/app && cd /opt/app && ln -s /tmp/node_modules
-
-
-
-RUN yarn install --ignore-engines 
+RUN node install --ignore-engines 
 RUN node server.js samdontspam@gmail.com hackpoly2017ucr2017
