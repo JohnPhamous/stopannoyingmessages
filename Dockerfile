@@ -19,5 +19,17 @@ RUN apt-get install -y -q --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get -y autoclean
 
-RUN node install --ignore-engines 
-RUN node server.js samdontspam@gmail.com hackpoly2017ucr2017
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash
+RUN apt-get install -y nodejs
+
+RUN mkdir ./src
+COPY ./package.json ./src/package.json 
+COPY ./server.js ./src/server.js
+RUN cd ./src
+CMD npm install --ignore-engines 
+
+COPY . /src
+
+EXPOSE 8080
+
+CMD ["node", "/src/server.js" "samdontspam@gmail.com" "hackpoly2017ucr2017"]
